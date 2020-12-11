@@ -23,7 +23,7 @@ be used.
 ## Installation
 
 ``` r
-install.packages("htmlvault")
+# install.packages("htmlvault") not yet
 ```
 
 ``` r
@@ -44,7 +44,7 @@ encrypt the document:
 library(htmlvault)
 key <- sodium::random(32)
 message(sodium::bin2hex(key))
-#> da97c8847b31a07b1af6eb62eb8c58ab1414b23375fb56a68b52b257be0e5b39
+#> 9709552d48ffab3f54fb4dce4c080790c072c860333c551251d3f76dfa28bbc2
 ```
 
 Then we call `htmlvault_encrypt_file` with the computed key.

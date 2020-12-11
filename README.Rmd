@@ -28,7 +28,7 @@ This package can encrypt arbitrary files such as PDF reports or RMarkdown export
 ## Installation
 
 ``` r
-install.packages("htmlvault")
+# install.packages("htmlvault") not yet
 ```
 
 ``` r
