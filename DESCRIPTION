@@ -25,9 +25,11 @@ RoxygenNote: 7.1.1
 URL: https://github.com/dirkschumacher/htmlvault
 BugReports: https://github.com/dirkschumacher/htmlvault/issues
 Imports: 
-    sodium,
+    sodium (>= 1.1),
     readr,
     mime,
     tools
 Suggests: 
     testthat
+Remotes:  
+    jeroen/sodium
