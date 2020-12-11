@@ -14,8 +14,9 @@ status](https://github.com/dirkschumacher/htmlvault/workflows/R-CMD-check/badge.
 
 This package can encrypt arbitrary files such as PDF reports or
 RMarkdown exports and embed them in an html document that can decrypt
-itself [libsodium](https://download.libsodium.org/doc/). The resulting
-html file is fully portable and just requires a browser to be used.
+itself using [libsodium](https://download.libsodium.org/doc/). The
+resulting html file is fully portable and just requires a browser to be
+used.
 
 *Use at your own risk. Feedback and bug reports very welcome\!*
 
@@ -43,7 +44,7 @@ encrypt the document:
 library(htmlvault)
 key <- sodium::random(32)
 message(sodium::bin2hex(key))
-#> 1c407232b3b3b27e13779336939b84b2edee6089e69e1527103d1e74cf733467
+#> af0ee29b8bf1daa98a83aa50ecab0ba3b958c0d5153f7fa514cfd27c5dfc1ed9
 ```
 
 Then we call `htmlvault_encrypt_file` with the computed key.

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 # Embed files in self-decrypting html pages
 
-This package can encrypt arbitrary files such as PDF reports or RMarkdown exports and embed them in an html document that can decrypt itself [libsodium](https://download.libsodium.org/doc/). The resulting html file is fully portable and just requires a browser to be used.
+This package can encrypt arbitrary files such as PDF reports or RMarkdown exports and embed them in an html document that can decrypt itself using [libsodium](https://download.libsodium.org/doc/). The resulting html file is fully portable and just requires a browser to be used.
 
 *Use at your own risk. Feedback and bug reports very welcome!*
 
