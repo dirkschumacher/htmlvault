@@ -10,13 +10,12 @@ status](https://www.r-pkg.org/badges/version/htmlvault)](https://CRAN.R-project.
 status](https://github.com/dirkschumacher/htmlvault/workflows/R-CMD-check/badge.svg)](https://github.com/dirkschumacher/htmlvault/actions)
 <!-- badges: end -->
 
-# Embed information in self-decrypting html pages
+# Embed files in self-decrypting html pages
 
 This package can encrypt arbitrary files such as PDF reports or
-RMarkdown exports and embed them in an html document that contains the
-code to decrypt using [libsodium](https://download.libsodium.org/doc/).
-The resulting html file is fully portable and just requires a browser to
-be used.
+RMarkdown exports and embed them in an html document that can decrypt
+itself [libsodium](https://download.libsodium.org/doc/). The resulting
+html file is fully portable and just requires a browser to be used.
 
 *Use at your own risk. Feedback and bug reports very welcome\!*
 
@@ -44,7 +43,7 @@ encrypt the document:
 library(htmlvault)
 key <- sodium::random(32)
 message(sodium::bin2hex(key))
-#> 9709552d48ffab3f54fb4dce4c080790c072c860333c551251d3f76dfa28bbc2
+#> 1c407232b3b3b27e13779336939b84b2edee6089e69e1527103d1e74cf733467
 ```
 
 Then we call `htmlvault_encrypt_file` with the computed key.
