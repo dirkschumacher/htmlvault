@@ -29,3 +29,5 @@ Imports:
     readr,
     mime,
     tools
+Suggests: 
+    testthat
