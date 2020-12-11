@@ -1,0 +1,119 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- badges: start -->
+
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/htmlvault)](https://CRAN.R-project.org/package=htmlvault)
+[![R build
+status](https://github.com/dirkschumacher/htmlvault/workflows/R-CMD-check/badge.svg)](https://github.com/dirkschumacher/htmlvault/actions)
+<!-- badges: end -->
+
+# Embed information in self-decrypting html pages
+
+This package can encrypt arbitrary files such as PDF reports or
+RMarkdown exports and embed them in an html document that contains the
+code to decrypt using [libsodium](https://download.libsodium.org/doc/).
+The resulting html file is fully portable and just requires a browser to
+be used.
+
+*Use at your own risk. Feedback and bug reports very welcome\!*
+
+## Installation
+
+``` r
+install.packages("htmlvault")
+```
+
+``` r
+remotes::install_github("dirkschumacher/htmlvault")
+```
+
+## Functions
+
+The package currently has just one function `htmlvault_encrypt_file` to
+encrypt files and create a new self-decrypting html file.
+
+### Encrypt files
+
+First we load the package and create a random secret with which we
+encrypt the document:
+
+``` r
+library(htmlvault)
+key <- sodium::random(32)
+message(sodium::bin2hex(key))
+#> da97c8847b31a07b1af6eb62eb8c58ab1414b23375fb56a68b52b257be0e5b39
+```
+
+Then we call `htmlvault_encrypt_file` with the computed key.
+
+``` r
+htmlvault_encrypt_file(
+  path = "devel/example/test.html",
+  output_path = "docs/test.encrypted.html",
+  key = key
+)
+```
+
+It uses the `mime` package to figure out the MIME type of the input file
+and thus supports many different file types. Below are two examples
+encrypting PDF and Word documents.
+
+``` r
+htmlvault_encrypt_file(
+  path = "devel/example/test.pdf",
+  output_path = "docs/test.encrypted_pdf.html",
+  key = key
+)
+```
+
+``` r
+htmlvault_encrypt_file(
+  path = "devel/example/test.docx",
+  output_path = "docs/test.encrypted_word.html",
+  key = key
+)
+```
+
+You can take a look at the exported files
+[here](https://dirkschumacher.github.io/htmlvault/test.encrypted.html),
+[here](https://dirkschumacher.github.io/htmlvault/test.encrypted_pdf.html)
+and
+[here](https://dirkschumacher.github.io/htmlvault/test.encrypted_word.html)
+and use the key printed above to decrypt it.
+
+## Inspiration
+
+Inspired and based on the work by @derhuerst on [self encrypting html
+pages](https://github.com/derhuerst/self-decrypting-html-page).
+
+## License
+
+MIT
+
+## Security
+
+  - The package uses `libsodium` for encryption and includes the code to
+    decrypt as javascript in the resulting html file.
+  - The security depends on your key strength, the correctness of this
+    package, the `sodium` R package and the `libsodium` library.
+  - Beware: the current implementation does not encrypt the MIME type of
+    your document. For example, anybody sees that the encrypted document
+    is of type PDF, but the actual content is just accessible after
+    decryption.
+
+## Development
+
+In `devel/r-encrypted-html-template` the code to generate the javascript
+file is contained. In order to update the template, you have to run the
+following:
+
+  - In `devel/r-encrypted-html-template` run `npm run build`. This
+    creates a new version of the template and copies it to
+    `devel/html-template.js`. It also creates a file called
+    `JSLICENSES.txt` that contains all licenses of used node packages.
+  - In `devel` run `combine.R`. This generates the file report template
+    and copies it to `inst/html-template.html`. This template is then
+    used within the R package to generate encrypted html files.

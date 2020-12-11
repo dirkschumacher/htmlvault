@@ -1,0 +1,10 @@
+^htmlvault\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^README\.Rmd$
+^devel$
+^docs$
+^SECURITY\.md$
+^cran-comments\.md$
+^CRAN-RELEASE$
+^\.github$
